@@ -1,0 +1,25 @@
+/* table {
+    border-radius: 10px;
+    background-color: gray;
+} */
+
+audio {
+    /* margin-right: auto; */
+    width: 70%;
+}
+.playerbutton.btn.btn-outline-info.list {
+    margin: 10px;
+}
+img.musiclist {
+    width: 70px;
+}
+.audio-controller {
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 40px;
+    /* background-color: rgba(179, 218, 255, 0.8); */
+    border-radius: 6px;
+    padding: none;
+    padding: 5px;
+    box-shadow: 5px 0px 0xp 0.3px gray;
+}

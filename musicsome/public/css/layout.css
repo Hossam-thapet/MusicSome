@@ -1,0 +1,10 @@
+body,
+html {
+    /* background-image: linear-gradient(black, black); */
+    background-color: #121212 !important;
+    font-family: "Big Shoulders Stencil Text", cursive;
+}
+
+.container-fluid {
+    background-color: transparent;
+}

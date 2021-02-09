@@ -1,0 +1,19 @@
+html,
+body {
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.container.music-start {
+    display: flex;
+    position: absolute;
+    right: 300px;
+    bottom: 200px;
+    width: 200px;
+}
+button.btn {
+    background-image: linear-gradient(#ff1a75, white);
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
