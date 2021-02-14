@@ -3,36 +3,33 @@
  
 @section('content')
 
+
+{{-- @for($i=0;$i<count($totalsingers) ; $i++)
+    <h1>{{$totalsingers[$i]}}</h1>
+@endfor --}}
+
+
 <div class="row index-container">
-<div class="col-sm-1 songers pt-3">
+<div class="col-sm-1 songers">
+    <form action="/category" method="get">
     <div class="row music-type">
-        <button  class="btn category active" value="all" id="moveto"><h6>All Songs</h6></button>
+        <a  class="btn category active" href="/songs" id="moveto"><h6>All Songs</h6></a>
     </div>
     
     <div class="row music-type">
         
-        <button  type="button"   class="btn category" id="moveto" name="singer" value="top_votes"  ><h6>Top Rated</h6></button>
+        <a  type="submit"   class="btn category" id="moveto" name="singer" href="/top_votes"  ><h6>Top Rated</h6></a>
     </div>
     <div class="row music-type">
-        <button  type="button"  class="btn category" id="moveto" name="singer" value="linkin_park" ><h6>Linkin park</h6></button>
+        
+        <a  type="submit"   class="btn category" id="moveto" name="singer" href="/recent"  ><h6>Recent</h6></a>
     </div>
+    @for($i=0;$i<count($totalsingers) ; $i++)
     <div class="row music-type">
-        <button  type="button"  class="btn category" id="moveto" name="singer" value="exo" ><h6>EXO</h6></button>
+        <button  type="submit"  class="btn category" id="moveto" name="singer" value="{{$totalsingers[$i]}}" ><h6>{{$totalsingers[$i]}}</h6></button>
     </div>
-    <div class="row music-type">
-        <button  type="button"  class="btn category" id="moveto" name="singer" value="bts" ><h6>BTS</h6></button>
-    </div>
-    <div class="row music-type">
-        <a href="" class="btn category"><h6>Blues</h6></a>
-    </div>
-    <div class="row music-type">
-        <a href="" class="btn category"><h6>Punk Rock</h6></a>
-    </div>
-    <div class="row music-type">
-        <a href="" class="btn category"><h6>Heavy metal</h6></a>
-   
-    </div>
-{{-- </form> --}}
+    @endfor
+</form>
 </div>
 <div class="col-sm-11 songs">
 @if ($message = Session::get('success'))
@@ -53,7 +50,7 @@
 <div class="container-fluid music-field pt-3" id="container">
     <div class="row ofSongs">
         @foreach($songs as $song)
-               <div class="col-md-3 mt-3">
+               <div class="col-lg-2 mt-3">
                 <div class="card" >
             @if($song->image == 'defultimage')         
         <img src="img/music.jpg" alt="">    
@@ -62,7 +59,7 @@
         @endif
         <div class="container card-body song-name">
             <p class="card-text text-wrap">{{$song->name}}</p>
-            <p style="color: white;">Votes: {{$song->votes}}</p>
+           
             @if(Auth::check())
             @if(auth::user()->role === "admin")
             <form action="{{ route('songs.destroy',$song->id) }}" method="POST" class="deleteform">
@@ -74,7 +71,7 @@
             @endif
             @endif
           </div>
-
+          @if(auth::check())
           @if(in_array($song->id,array_column($songsid,'song_id')))
           
           <button  class="add-to-collection sub-button btn " value="apply" disabled >
@@ -92,14 +89,14 @@
           </form>
        
         @endif
-
-            </div>
-            
-            <audio  class="player" id="player-{{$song->id}}"  src="{{asset('audios/'.$song->song)}}" type="audio/ogg" ></audio>
+        @endif
+        <span> {{$song->votes}}</span>
+        <audio  class="player" id="player-{{$song->id}}"  src="{{asset('audios/'.$song->song)}}" type="audio/ogg" ></audio>
             <div class="player-control">
                 <button data-song-id="{{$song->id}}" class="playerbutton play sub-button btn " onclick="playmusic(this)" ><i class="fas fa-play"></i></button>
                 <button data-song-id="{{$song->id}}" class="playerbutton pause sub-button btn " onclick="pausemusic(this)"><i class="fas fa-pause"></i></button>
             </div>
+            @if(auth::check())
             @if(!in_array($song->id,array_column($checkVote,'song_id')))
                <form action="{{ url('vote',$song->id) }}" method="get" >
                 <button data-song-id="{{$song->id}}"  class="vote-to-collection sub-button btn " value="apply" id="vote" >
@@ -111,9 +108,10 @@
                 <i class="fas fa-thumbs-up"></i>
               </button>
               @endif
+              @endif
+            </div>
                </div>
             @endforeach
-            
         </div>
     </div>
     </div>

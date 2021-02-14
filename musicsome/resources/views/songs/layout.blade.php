@@ -7,6 +7,7 @@
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/load.css') }}" rel="stylesheet">
     <script src="{{ asset('js/audio.js') }}" defer></script>
    
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -20,6 +21,9 @@
 <body>
   
 <div class="container-fluid">
+    {{-- <div class="container-fluid load">
+        <div class="loader"></div>
+        </div> --}}
     @yield('content')
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

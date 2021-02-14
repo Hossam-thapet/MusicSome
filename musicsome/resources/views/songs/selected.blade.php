@@ -6,7 +6,7 @@
 <div class="container-fluid music-field pt-3" id="container">
     <div class="row ofSongs">
         @foreach($songs as $song)
-               <div class="col-md-3 mt-3">
+               <div class="col-lg-2 mt-3">
                 <div class="card" >
             @if($song->image == 'defultimage')         
         <img src="img/music.jpg" alt="">    
@@ -29,13 +29,14 @@
           </div>
 
           
-
+          <span> {{$song->votes}}</span>
             </div>
             
             <audio  class="player" id="player-{{$song->id}}"  src="{{asset('audios/'.$song->song)}}" type="audio/ogg" ></audio>
             <div class="player-control">
                 <button data-song-id="{{$song->id}}" class="playerbutton play sub-button btn " onclick="playmusic(this)" ><i class="fas fa-play"></i></button>
                 <button data-song-id="{{$song->id}}" class="playerbutton pause sub-button btn " onclick="pausemusic(this)"><i class="fas fa-pause"></i></button>
+                
             </div>
            
                </div>

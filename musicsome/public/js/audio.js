@@ -13,20 +13,7 @@ $(".play").click(function(){
 
 
   var player=document.getElementById("player");
-  // function playmusic()
-  // {
-    
-  //   this.player.play();
 
-  // }
-  // function pausemusic()
-  // {
-  //   this.player.pause();
-    
-  // }
-  // $(".play").click(function(){
-  //   $(this).parent().find('.player').trigger('play');
-  // })
   function playmusic(e)
   {
     var songId = e.dataset.songId,
@@ -58,13 +45,13 @@ $(".play").click(function(){
 
 
 
-var i = 1;
+  var i = 0;
 
   function runnext() {
-    playingnow = true;
+    console.log(i)
   while ( !player ) {
-    var player = document.getElementById("player-" + i); 
     i++ ;
+    var player = document.getElementById("player-" + i); 
     console.log(i)
     console.log(player)
   
@@ -78,15 +65,16 @@ var i = 1;
   
   player.play();
   player.addEventListener('ended', runnext);
-  i++;
+  i;
 }
 function sikpsong()
 {
 
-  i=i-2;
+  
+  console.log(i);
   var player = document.getElementById("player-" + i); 
   player.pause();
-  i++;
+
  runnext();
 }
    
@@ -94,40 +82,13 @@ function sikpsong()
 
 function pauseit()
 {
-  i=i-2;
+  
     var player = document.getElementById("player-" + i); 
     console.log(i+"vlaue");
+    i-- ;
 player.pause();
 }
 
-
-
-// function pauseit()
-// { 
-
-//  var player = document.getElementById("player-" + i); 
-//  console.log(i);
-// player.pause();
-// }
-
-
-
-
-
-
-  $(".btn.category").click(function(){
-   
-    var thevaleu= $(this).val();
-    console.log(thevaleu);
-    $.ajax({url: "/"+thevaleu, success: function(result){
-      $("#container").html(result);
-    }});
-  });
-
-
-  // $("#vote").click(function(){
-  //   $(this).addClass("cliked");
-  // })
 
 
   $(document).ready(function(){
@@ -137,3 +98,13 @@ player.pause();
    
 });
 });
+
+
+
+
+$(window).on("load",function () {
+  $(".container-fluid.load").fadeOut('40');
+});
+
+
+

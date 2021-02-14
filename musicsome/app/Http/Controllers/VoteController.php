@@ -16,13 +16,12 @@ class VoteController extends Controller
             ->exists();
            
         if (! $songVote) {
-            // dd($id);
+      
             $vote=Vote::create([
                 'user_id' => Auth::user()->id,
                 'song_id' => $id,
             ]);
-            // $vote= $vote->toArray();
-            // dd($vote);
+           
             DB::table('songs')
         ->where('id', $id)
          ->increment('votes');

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Traits\SongTrait;
 use App\Song;
 use auth;
 use DB ;
@@ -11,38 +11,14 @@ use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+use SongTrait;
+   
     public function index()
     {
         $songs = Song::latest()->paginate(20);
-        if(Auth::check()){
-        $songid=Collection::select("song_id")->where("user_id","=",auth::user()->id)->get();
-        $songsid=$songid->toArray();
-
-        $checkVote=Vote::select("song_id")->where("user_id","=",auth::user()->id)->get();
-        $checkVote=$checkVote->toArray();
-            
-            return view('songs.index',compact('songs','songsid','checkVote'))
-            ->with('i', (request()->input('page', 1) - 1) * 20);
-       
+        $this->songs =$songs;
+        return  $this->Vote();
         }
-        else
-       { $songsid=array() ;
-        
-        return view('songs.index',compact('songs','songsid'))
-            ->with('i', (request()->input('page', 1) - 1) * 20);
-        }
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
     public function create()
     {
         if(Auth::check()){
@@ -52,13 +28,6 @@ class SongController extends Controller
         
     }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if(Auth::check()){
